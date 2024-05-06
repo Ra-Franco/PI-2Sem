@@ -1,10 +1,9 @@
 package com.on.noted.api.domain.evento;
 
 import com.on.noted.api.domain.agenda.Agenda;
+import com.on.noted.api.domain.evento.dto.DadosCriacaoEvento;
 import jakarta.persistence.*;
-import org.springframework.cglib.core.Local;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 

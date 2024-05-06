@@ -3,7 +3,7 @@ package com.on.noted.api.service;
 import com.on.noted.api.domain.agenda.Agenda;
 import com.on.noted.api.domain.agenda.AgendaRepository;
 import com.on.noted.api.domain.agenda.dto.DatasEventos;
-import com.on.noted.api.domain.evento.DadosCriacaoEvento;
+import com.on.noted.api.domain.evento.dto.DadosCriacaoEvento;
 import com.on.noted.api.domain.evento.Evento;
 import com.on.noted.api.domain.evento.EventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
