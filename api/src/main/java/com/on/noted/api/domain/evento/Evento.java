@@ -2,9 +2,11 @@ package com.on.noted.api.domain.evento;
 
 import com.on.noted.api.domain.agenda.Agenda;
 import jakarta.persistence.*;
+import org.springframework.cglib.core.Local;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Objects;
+import java.util.*;
 
 @Table(name = "eventos")
 @Entity(name = "Evento")
@@ -19,6 +21,12 @@ public class Evento {
     @ManyToOne
     @JoinColumn(name = "agenda_id", nullable = false)
     private Agenda agenda;
+
+    public Evento(Agenda agenda, DadosCriacaoEvento dados) {
+        this.agenda = agenda;
+        this.ev_data = dados.data();
+        this.ev_descricao = dados.descricao();
+    }
 
     public Long getEv_id() {
         return ev_id;
@@ -42,6 +50,15 @@ public class Evento {
 
     public void setEv_descricao(String ev_descricao) {
         this.ev_descricao = ev_descricao;
+    }
+
+    public Evento(){}
+
+    public Evento(Long ev_id, LocalDateTime ev_data, String ev_descricao, Agenda agenda) {
+        this.ev_id = ev_id;
+        this.ev_data = ev_data;
+        this.ev_descricao = ev_descricao;
+        this.agenda = agenda;
     }
 
     @Override

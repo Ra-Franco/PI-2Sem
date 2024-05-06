@@ -1,5 +1,6 @@
 package com.on.noted.api.domain.agenda;
 
+import com.on.noted.api.domain.agenda.dto.CadastroAgenda;
 import com.on.noted.api.domain.evento.Evento;
 import jakarta.persistence.*;
 
@@ -14,6 +15,7 @@ public class Agenda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String titulo;
+
     @OneToMany(mappedBy = "agenda")
     private List<Evento> eventoList;
 
@@ -39,6 +41,14 @@ public class Agenda {
 
     public void setEventoList(List<Evento> eventoList) {
         this.eventoList = eventoList;
+    }
+
+    public Agenda(){
+
+    }
+
+    public Agenda(CadastroAgenda agenda){
+        this.titulo = agenda.descricao();
     }
 
     @Override
