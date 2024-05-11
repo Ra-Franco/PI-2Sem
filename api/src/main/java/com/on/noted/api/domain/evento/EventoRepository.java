@@ -12,4 +12,9 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
             "and e.ev_data between :dataIni and :dataFim"
             , nativeQuery = true)
     List<Evento> findEventoByDatas(Long agendaId, LocalDate dataIni, LocalDate dataFim);
+
+    @Query(value = "DELETE FROM eventos \n" +
+            "WHERE ev_id = :eventoId \n" +
+            "AND agenda_id = :agendaId")
+    void deleteEventoById(Long agendaId, Long eventoId);
 }

@@ -60,4 +60,10 @@ public class AgendaController {
         return ResponseEntity.ok(dto);
     }
 
+    @DeleteMapping("/{id}/eventos/{idEvento}")
+    public ResponseEntity deletarEvento(@PathVariable Long id, @PathVariable Long idEvento){
+        service.deleteEventoById(id, idEvento);
+        return ResponseEntity.noContent().build();
+    }
+
 }

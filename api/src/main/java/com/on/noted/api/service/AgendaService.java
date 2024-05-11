@@ -56,5 +56,10 @@ public class AgendaService {
             Evento evento = new Evento(agenda, dados);
             return eventoRepository.save(evento);
     }
+
+    public void deleteEventoById(Long idAgenda, Long idEvento){
+        eventoRepository.deleteEventoById(idAgenda, idEvento);
+    }
+
 }
 
