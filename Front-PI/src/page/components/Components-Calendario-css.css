@@ -4,12 +4,12 @@
 }
 
 .calendario{
-    height: 100vh;
+    height: 90vh;
     width: 80%;
     overflow: auto;
 }
 .toolbar{
-    height: 100vh;
+    height: 90vh;
     width: 20%;
     min-width: 300px;
     color: #ffffff;
