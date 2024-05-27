@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDate;
 import java.util.List;
-
 public interface EventoRepository extends JpaRepository<Evento, Long> {
     @Query(value = "select e.* from eventos e \n" +
             "where e.agenda_id = :agendaId \n" +
@@ -14,7 +13,7 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
     List<Evento> findEventoByDatas(Long agendaId, LocalDate dataIni, LocalDate dataFim);
 
     @Query(value = "DELETE FROM eventos \n" +
-            "WHERE ev_id = :eventoId \n" +
-            "AND agenda_id = :agendaId")
+            "WHERE evId = :eventoId \n" +
+            "AND agenda_id = :agendaId", nativeQuery = true)
     void deleteEventoById(Long agendaId, Long eventoId);
 }

@@ -32,7 +32,7 @@ public class AgendaService {
             return mapEventos;
     }
     private void adicionarEventos(Evento evento, HashMap<LocalDate, List<Evento>> mapEventos){
-        LocalDate dataEvento = evento.getEv_data().toLocalDate();
+        LocalDate dataEvento = evento.getEvDataIni().toLocalDate();
         if(!mapEventos.containsKey(dataEvento)){
             mapEventos.put(dataEvento, new ArrayList<>());
         }

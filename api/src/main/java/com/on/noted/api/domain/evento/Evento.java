@@ -13,9 +13,14 @@ public class Evento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ev_id;
-    private LocalDateTime ev_data;
-    private String ev_descricao;
+    @Column(name = "ev_id")
+    private Long EvId;
+    @Column(name = "ev_data_ini")
+    private LocalDateTime evDataIni;
+    @Column(name = "ev_data_fim")
+    private LocalDateTime evDataFim;
+    @Column(name = "ev_descricao")
+    private String evDescricao;
 
     @ManyToOne
     @JoinColumn(name = "agenda_id", nullable = false)
@@ -23,40 +28,37 @@ public class Evento {
 
     public Evento(Agenda agenda, DadosCriacaoEvento dados) {
         this.agenda = agenda;
-        this.ev_data = dados.data();
-        this.ev_descricao = dados.descricao();
+        this.evDataIni = dados.dataIni();
+        this.evDataFim = dados.dataFim();
+        this.evDescricao = dados.descricao();
     }
 
-    public Long getEv_id() {
-        return ev_id;
+    public Long getEvId() {
+        return EvId;
     }
 
-    public void setEv_id(Long ev_id) {
-        this.ev_id = ev_id;
+    public LocalDateTime getEvDataIni() {
+        return evDataIni;
     }
 
-    public LocalDateTime getEv_data() {
-        return ev_data;
+    public String getEvDescricao() {
+        return evDescricao;
     }
 
-    public void setEv_data(LocalDateTime ev_data) {
-        this.ev_data = ev_data;
+    public LocalDateTime getEvDataFim() {
+        return evDataFim;
     }
 
-    public String getEv_descricao() {
-        return ev_descricao;
-    }
-
-    public void setEv_descricao(String ev_descricao) {
-        this.ev_descricao = ev_descricao;
+    public void setEvDescricao(String evDescricao) {
+        this.evDescricao = evDescricao;
     }
 
     public Evento(){}
 
-    public Evento(Long ev_id, LocalDateTime ev_data, String ev_descricao, Agenda agenda) {
-        this.ev_id = ev_id;
-        this.ev_data = ev_data;
-        this.ev_descricao = ev_descricao;
+    public Evento(Long EvId, LocalDateTime evDataIni, String evDescricao, Agenda agenda) {
+        this.EvId = EvId;
+        this.evDataIni = evDataIni;
+        this.evDescricao = evDescricao;
         this.agenda = agenda;
     }
 
@@ -65,14 +67,14 @@ public class Evento {
         if (this == o) return true;
         if (!(o instanceof Evento evento)) return false;
 
-        return Objects.equals(getEv_id(), evento.getEv_id()) && Objects.equals(getEv_data(), evento.getEv_data()) && Objects.equals(getEv_descricao(), evento.getEv_descricao());
+        return Objects.equals(getEvId(), evento.getEvId()) && Objects.equals(getEvDataIni(), evento.getEvDataIni()) && Objects.equals(getEvDescricao(), evento.getEvDescricao());
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hashCode(getEv_id());
-        result = 31 * result + Objects.hashCode(getEv_data());
-        result = 31 * result + Objects.hashCode(getEv_descricao());
+        int result = Objects.hashCode(getEvId());
+        result = 31 * result + Objects.hashCode(getEvDataIni());
+        result = 31 * result + Objects.hashCode(getEvDescricao());
         return result;
     }
 }
