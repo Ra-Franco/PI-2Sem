@@ -1,5 +1,6 @@
 package com.on.noted.api.domain.usuario;
 
+import com.on.noted.api.domain.usuario.dto.DadosCadastro;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,6 +21,13 @@ public class Usuario implements UserDetails {
     private String email;
     @Column(name = "user_password")
     private String password;
+
+    public Usuario(){}
+
+    public Usuario(DadosCadastro dadosCadastro){
+        this.email = dadosCadastro.email();
+        this.password = dadosCadastro.senha();
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities(){

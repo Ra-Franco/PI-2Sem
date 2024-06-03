@@ -26,7 +26,7 @@ public class SecurityConfigurations {
         return http.csrf(csrf -> csrf.disable())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> {
-                    req.requestMatchers("/login").permitAll();
+                    req.requestMatchers("/login", "/cadastrar").permitAll();
                     req.requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll();
                     req.anyRequest().authenticated();
                 })
@@ -41,7 +41,7 @@ public class SecurityConfigurations {
 
     @Bean
     public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(13);
     }
 
 }
