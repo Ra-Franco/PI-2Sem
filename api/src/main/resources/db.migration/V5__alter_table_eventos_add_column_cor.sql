@@ -1,0 +1,1 @@
+alter table eventos add column ev_cor varchar(10);
