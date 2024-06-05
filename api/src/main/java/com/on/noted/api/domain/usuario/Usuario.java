@@ -1,5 +1,6 @@
 package com.on.noted.api.domain.usuario;
 
+import com.on.noted.api.domain.agenda.Agenda;
 import com.on.noted.api.domain.usuario.dto.DadosCadastro;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;

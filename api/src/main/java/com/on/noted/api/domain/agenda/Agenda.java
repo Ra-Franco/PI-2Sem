@@ -15,6 +15,8 @@ public class Agenda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String titulo;
+    @Column(name = "user_id")
+    private Long userId;
 
     @OneToMany(mappedBy = "agenda")
     private List<Evento> eventoList;
@@ -49,6 +51,7 @@ public class Agenda {
 
     public Agenda(CadastroAgenda agenda){
         this.titulo = agenda.descricao();
+        this.userId = agenda.userId();
     }
 
     @Override

@@ -32,7 +32,7 @@ public class AgendaController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity adicionarAgenda(@RequestBody CadastroAgenda cadastroAgenda, UriComponentsBuilder uriBuilder){
+    public ResponseEntity adicionarAgenda(@RequestBody @Valid CadastroAgenda cadastroAgenda, UriComponentsBuilder uriBuilder){
         var agenda = new Agenda(cadastroAgenda);
         service.saveAgenda(agenda);
         var uri = uriBuilder.path("/agenda/{id}").buildAndExpand(agenda.getId()).toUri();
