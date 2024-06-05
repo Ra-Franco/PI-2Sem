@@ -76,14 +76,26 @@ function Calendario() {
     const handleSelecionarAtividades = (atividadesSelecionadas) =>{
         setEventosFiltrados(atividadesSelecionadas);
     }
-    
 
+        const [isModalOpen, setIsModalOpen] = useState(false);
+      
+        const handleOpenModal = () => {
+          setIsModalOpen(true);
+        };
+      
+        const handleCloseModal = () => {
+          setIsModalOpen(false);
+        };
 
     return (
         <div className='tela ' >
             <div className='toolbar p-4' style={{maxHeight:'100vh', overflowY:'auto'}}>
-                <Adicionar onAdicionar= {handleAdicionar}/>
-
+            <button onClick={handleOpenModal} style={{ padding: '10px 20px', borderRadius: '5px', border: 'none', backgroundColor: '#6d6f6d', color: 'white', cursor: 'pointer', fontSize: '16px', width: '100%' }}>Adicionar Evento</button>
+                <Adicionar
+                    isOpen={isModalOpen}
+                    onRequestClose={handleCloseModal}
+                    onAdicionar={handleAdicionar}
+                />
                 <FiltroAtividades atividades={eventos} onSelecionarAtividades={handleSelecionarAtividades}/>
             </div>
 

@@ -1,6 +1,6 @@
 .tela{
     display: flex;
-    background-color: #262626;
+    background-color: white;
 }
 
 .calendario{
@@ -11,10 +11,10 @@
 .toolbar{
     height: 90vh;
     width: 20%;
-    min-width: 300px;
+    /*min-width: 300px;*/
     color: #ffffff;
-    background-color: #1a1a1a;
-    border-right: 1px solid #bbb;
+    background-color: white;
+    border-right: 1px solid #4b4a4a;
 }
 /*HEADER MOD*/
 .toolbar-container{
@@ -25,7 +25,7 @@
 }
 .mesAno{
     width: 50%;
-    color: #f3f3f3;
+    color: #4b4a4a;
     justify-content: flex-start;
 }
 .dirtop{
@@ -71,7 +71,7 @@
 }
 .rbc-toolbar button{
     color: #cecece;
-    border: 1px solid #cccccc4f;
+    border: 1px solid #7b7a7a4f;
 }
 .rbc-toolbar button:active,
 .rbc-toolbar button.rbc-active{
@@ -82,38 +82,38 @@
 /*Corpo*/
 /*Linhas*/
 .rbc-month-view{
-    border-color: #eeeeee5f;
+    border-color: #3737375f;
 }
 .rbc-month-row+ .rbc-month-row {
-    border-color: #dddddd73;
+    border-color: #3737375f;
 }
 .rbc-day-bg + .rbc-day-bg {
-    border-color: #dddddd73;
+    border-color: #3737375f;
 }
 /*Mes*/
 .rbc-header{
-    color: #eeeeeeee;
-    border-color: #dddddd73;
+    color: #4b4a4a;
+    border-color: #3737375f;
 }
 .rbc-header + .rbc-header{
     border-top: 0px;
     border-left: 0px;
     border-right: 0px;
-    border-color: #dddddd73;
+    border-color: #3737375f;
 }
 .rbc-off-range-bg{
-    background-color: #313131;
+    background-color: #c9c5c5;
 }
 .rbc-today{
-    background-color: #1a1a1a;
+    background-color: #808faa;
 }
 .rbc-button-link{
     margin: 5px;
     font-size: 15px;
-    color: #eeeeeee5;
+    color: #4b4a4a;
 }
 .rbc-off-range .rbc-button-link{
-    color: #eeeeee37;
+    color: #4b4a4a;
 }
 .rbc-now .rbc-button-link{
     background-color: #f15550;
@@ -125,8 +125,8 @@
     font-size: 16px;
 }
 .rbc-time-content,.rbc-time-content > .rbc-day-slot,.rbc-timeslot-group, .rbc-time-slot{
-    color: #bbb;
-    border-color: #b0b0b036;
+    color: #4b4a4a;
+    border-color: #474747ad;
 }
 .rbc-day-slot .rbc-time-slot{
     border-top: 1px solid #c8c8c80a;
@@ -143,3 +143,4 @@
     font-weight: bold;
     color: #e0e0e0;
 }
+
