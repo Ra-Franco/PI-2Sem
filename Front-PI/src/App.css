@@ -7,6 +7,82 @@
   pointer-events: none;
 }
 
+.wrapper {
+    width: 420px;
+    background: rgba(128, 128, 128, 0.2);;
+    color: #222222;
+    border-radius: 10px;
+    padding: 30px 40px;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);  
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.wrapper h1{
+  font-size: 36px;
+  text-align: center;
+}
+.wrapper .input-box{
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin: 30px 0;
+}
+.input-box input{
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  border: 2px solid rgba(0, 0, 0, 0.338);
+  border-radius: 40px;
+  font-size: 16px;
+  color: #222222;
+  padding: 20px 45px 20px 20px;
+}
+.input-box input::placeholder{
+  color: #222222;
+
+}
+.input-box i{
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+}
+.wrapper .botao{
+  width: 100%;
+  height: 45px;
+  background: #9a9a9a;
+  border: none;
+  outline: none;
+  border-radius: 45px;
+  box-shadow: 0 0 10px rgb(0,0,0,.1);
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+}
+.wrapper .registro{
+  font-size: 14.5px;
+  text-align: center;
+  margin: 20px 0 15px;
+}
+.registro p a{
+  color: #222222;
+  text-decoration: none;
+  font-weight: 600;
+}
+.registro p a:hover{
+  text-decoration: underline;
+}
+
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -35,4 +111,25 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Transições */
+
+.fade-enter {
+  opacity: 0;
+  transform: translateX(-10%);
+}
+.fade-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.fade-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+.fade-exit-active {
+  opacity: 0;
+  transform: translateX(10%);
+  transition: opacity 300ms, transform 300ms;
 }
