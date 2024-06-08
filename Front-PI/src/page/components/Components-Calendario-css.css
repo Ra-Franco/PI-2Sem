@@ -132,15 +132,14 @@
     border-top: 1px solid #c8c8c80a;
 }
 /*Agenda*/
-.rbc-agenda-content, .rbc-agenda-view{
-    color: #aaa;
-}
-.rbc-agenda-date-cell, .rbc-agenda-time-cell{
-    background-color: #262626;
-}
 .rbc-agenda-event-cell{
     border-radius: 20px;
     font-weight: bold;
     color: #e0e0e0;
 }
-
+.rbc-agenda-view table.rbc-agenda-table {
+    background-color: #6d6f6d;
+}
+.rbc-agenda-view table.rbc-agenda-table thead > tr > th {
+    color: aliceblue;
+}
