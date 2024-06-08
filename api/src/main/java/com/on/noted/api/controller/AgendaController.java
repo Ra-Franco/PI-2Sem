@@ -3,6 +3,7 @@ package com.on.noted.api.controller;
 import com.on.noted.api.domain.agenda.Agenda;
 import com.on.noted.api.domain.agenda.dto.CadastroAgenda;
 import com.on.noted.api.domain.agenda.dto.DatasEventos;
+import com.on.noted.api.domain.evento.dto.DadosAlteracaoEvento;
 import com.on.noted.api.domain.evento.dto.DadosCriacaoEvento;
 import com.on.noted.api.domain.evento.Evento;
 import com.on.noted.api.service.AgendaService;
@@ -58,6 +59,13 @@ public class AgendaController {
     @Transactional
     public ResponseEntity adicionarEvento(@PathVariable Long id,@RequestBody @Valid DadosCriacaoEvento dados){
         var dto = service.adicionaEvento(id, dados);
+        return ResponseEntity.ok(dto);
+    }
+
+    @PutMapping("/{id}/eventos")
+    @Transactional
+    public ResponseEntity alterarEvento(@PathVariable Long id, @RequestBody @Valid DadosAlteracaoEvento dados){
+        var dto = service.alterarEvento(id, dados);
         return ResponseEntity.ok(dto);
     }
 

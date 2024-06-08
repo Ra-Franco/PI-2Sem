@@ -3,9 +3,11 @@ package com.on.noted.api.service;
 import com.on.noted.api.domain.agenda.Agenda;
 import com.on.noted.api.domain.agenda.AgendaRepository;
 import com.on.noted.api.domain.agenda.dto.DatasEventos;
+import com.on.noted.api.domain.evento.dto.DadosAlteracaoEvento;
 import com.on.noted.api.domain.evento.dto.DadosCriacaoEvento;
 import com.on.noted.api.domain.evento.Evento;
 import com.on.noted.api.domain.evento.EventoRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AgendaService {
@@ -61,5 +64,18 @@ public class AgendaService {
         eventoRepository.deleteEventoById(idAgenda, idEvento);
     }
 
+    public Evento alterarEvento(Long id, @Valid DadosAlteracaoEvento dados) {
+        Optional<Evento> evento = eventoRepository.findEventoById(id ,dados.id());
+        if(evento.isPresent()){
+            Evento eventoExistente = evento.get();
+            eventoExistente.setEvCor(dados.cor());
+            eventoExistente.setEvDescricao(dados.descricao());
+            eventoExistente.setEvDataFim(dados.dataFim());
+            eventoExistente.setEvDataIni(dados.dataIni());
+
+            return eventoRepository.save(eventoExistente);
+        }
+        return null;
+    }
 }
 

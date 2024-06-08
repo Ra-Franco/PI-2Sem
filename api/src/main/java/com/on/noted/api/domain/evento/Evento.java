@@ -54,6 +54,18 @@ public class Evento {
 
     public String getEvCor() {return evCor;}
 
+    public void setEvDataIni(LocalDateTime evDataIni) {
+        this.evDataIni = evDataIni;
+    }
+
+    public void setEvDataFim(LocalDateTime evDataFim) {
+        this.evDataFim = evDataFim;
+    }
+
+    public void setEvCor(String evCor) {
+        this.evCor = evCor;
+    }
+
     public void setEvDescricao(String evDescricao) {
         this.evDescricao = evDescricao;
     }
