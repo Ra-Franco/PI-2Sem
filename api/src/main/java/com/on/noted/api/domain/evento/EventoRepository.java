@@ -1,6 +1,8 @@
 package com.on.noted.api.domain.evento;
 
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDate;
@@ -23,6 +25,8 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
             , nativeQuery = true)
     Optional<Evento> findEventoById(Long agendaId, Long id);
 
+    @Transactional
+    @Modifying
     @Query(value = "DELETE FROM eventos \n" +
             "WHERE evId = :eventoId \n" +
             "AND agenda_id = :agendaId", nativeQuery = true)
