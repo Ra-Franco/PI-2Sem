@@ -17,6 +17,7 @@ public record DadosAlteracaoEvento(
         LocalDateTime dataFim,
         @NotNull
         String descricao,
-        String cor
+        String cor,
+        String tipo
 ) {
 }

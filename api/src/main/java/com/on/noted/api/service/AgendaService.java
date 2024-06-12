@@ -72,6 +72,7 @@ public class AgendaService {
             eventoExistente.setEvDescricao(dados.descricao());
             eventoExistente.setEvDataFim(dados.dataFim());
             eventoExistente.setEvDataIni(dados.dataIni());
+            eventoExistente.setTipo(dados.tipo());
 
             return eventoRepository.save(eventoExistente);
         }

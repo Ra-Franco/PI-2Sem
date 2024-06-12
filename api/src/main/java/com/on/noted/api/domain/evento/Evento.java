@@ -23,6 +23,8 @@ public class Evento {
     private String evDescricao;
     @Column(name = "ev_cor")
     private String evCor;
+    @Column(name = "ev_tipo")
+    private String tipo;
 
     @ManyToOne
     @JoinColumn(name = "agenda_id", nullable = false)
@@ -34,6 +36,7 @@ public class Evento {
         this.evDataFim = dados.dataFim();
         this.evDescricao = dados.descricao();
         this.evCor = dados.cor();
+        this.tipo = dados.tipo();
     }
 
     public Long getEvId() {
@@ -66,18 +69,27 @@ public class Evento {
         this.evCor = evCor;
     }
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
     public void setEvDescricao(String evDescricao) {
         this.evDescricao = evDescricao;
     }
 
     public Evento(){}
 
-    public Evento(Long EvId, LocalDateTime evDataIni, String evDescricao, String evCor, Agenda agenda) {
+    public Evento(Long EvId, LocalDateTime evDataIni, String evDescricao, String evCor, Agenda agenda, String tipo) {
         this.EvId = EvId;
         this.evDataIni = evDataIni;
         this.evDescricao = evDescricao;
         this.agenda = agenda;
         this.evCor = evCor;
+        this.tipo = tipo;
     }
 
     @Override
