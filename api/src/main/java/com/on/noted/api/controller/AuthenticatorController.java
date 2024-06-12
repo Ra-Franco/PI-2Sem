@@ -43,9 +43,9 @@ public class AuthenticatorController {
         if (!passwordValidated){
             return new ResponseEntity<>("Invalid password", HttpStatus.UNAUTHORIZED);
         }
-
-        String tokenJWT = usuarioService.gerarToken((Usuario) user);
-        return ResponseEntity.ok(new DadosTokenJWT(tokenJWT));
+        Usuario usuario = (Usuario) user;
+        String tokenJWT = usuarioService.gerarToken(usuario);
+        return ResponseEntity.ok(new DadosTokenJWT(usuario.getId(), tokenJWT));
     }
     @PostMapping("/cadastrar")
     public ResponseEntity efetuarCadastro(@RequestBody @Valid DadosCadastro dados){

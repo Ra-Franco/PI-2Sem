@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 public interface AgendaRepository extends JpaRepository <Agenda, Long> {
     @Query("Select a from Agenda a \n" +
-            "where a.id = :id")
+            "where a.userId = :id")
     Agenda findId(Long id);
 
 }
