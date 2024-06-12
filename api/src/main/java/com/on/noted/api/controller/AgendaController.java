@@ -6,6 +6,7 @@ import com.on.noted.api.domain.agenda.dto.DatasEventos;
 import com.on.noted.api.domain.evento.dto.DadosAlteracaoEvento;
 import com.on.noted.api.domain.evento.dto.DadosCriacaoEvento;
 import com.on.noted.api.domain.evento.Evento;
+import com.on.noted.api.domain.evento.dto.DadosEnvioEvento;
 import com.on.noted.api.service.AgendaService;
 import jakarta.validation.Valid;
 import jakarta.websocket.server.PathParam;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -51,9 +53,13 @@ public class AgendaController {
 
     @GetMapping("/{id}/eventos")
     @Transactional
-    public ResponseEntity<List<Evento>> getEventosByData(@PathVariable Long id, @RequestParam String dataIni, @RequestParam String dataFim){
+    public ResponseEntity<List<DadosEnvioEvento>> getEventosByData(@PathVariable Long id, @RequestParam String dataIni, @RequestParam String dataFim){
         var eventos = service.getEventosByData(id, dataIni, dataFim);
-        return ResponseEntity.ok(eventos);
+        List<DadosEnvioEvento> eventoDTOList = new ArrayList<>();
+        for(Evento e : eventos){
+            eventoDTOList.add(new DadosEnvioEvento(e));
+        }
+        return ResponseEntity.ok(eventoDTOList);
     }
 
 
