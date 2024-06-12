@@ -17,8 +17,8 @@ public record DadosCriacaoEvento(
         LocalDateTime dataFim,
         @NotNull
         String descricao,
-        @Max(7)
-        String cor
+        String cor,
+        String tipo
 )
 {
 
