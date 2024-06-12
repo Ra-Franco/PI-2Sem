@@ -28,10 +28,12 @@ public class AgendaService {
     @Autowired
     private EventoRepository eventoRepository;
 
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+    private final DateTimeFormatter formatterHour = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-    public HashMap<LocalDate, List<Evento>> getEventosByData(Long id, DatasEventos datasEventos) {
-            var listEventos = eventoRepository.findEventoByDatas(id, datasEventos.dataIni(), datasEventos.dataFim());
+    public HashMap<LocalDate, List<Evento>> getEventosByData(Long id, String dataIni, String dataFim) {
+
+            var listEventos = eventoRepository.findEventoByDatas(id, LocalDate.parse(dataIni, formatter), LocalDate.parse(dataFim, formatter));
             HashMap<LocalDate, List<Evento>> mapEventos = new HashMap<>();
             for (Evento e : listEventos) {
                 adicionarEventos(e, mapEventos);
@@ -74,8 +76,8 @@ public class AgendaService {
             Evento eventoExistente = evento.get();
             eventoExistente.setEvCor(dados.cor());
             eventoExistente.setEvDescricao(dados.descricao());
-            eventoExistente.setEvDataFim(LocalDateTime.parse(dados.dataFim(), formatter));
-            eventoExistente.setEvDataIni(LocalDateTime.parse(dados.dataIni(), formatter));
+            eventoExistente.setEvDataFim(LocalDateTime.parse(dados.dataFim(), formatterHour));
+            eventoExistente.setEvDataIni(LocalDateTime.parse(dados.dataIni(), formatterHour));
             eventoExistente.setTipo(dados.tipo());
 
             return eventoRepository.save(eventoExistente);
