@@ -39,7 +39,9 @@ function LoginApp({ onLogin }) {
       if (response.status === 200) {
         console.log(response);
         const token = response.data.token; 
+        const id = response.data.id;
         localStorage.setItem('token', token);
+        localStorage.setItem('Id', id);
         onLogin();
       }
     } catch (error) {

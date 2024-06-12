@@ -1,13 +1,15 @@
 import React from 'react';
 import Modal from 'react-modal';
+import axios from 'axios';
+import { format } from 'date-fns';
 
 const Adicionar = ({ isOpen, onRequestClose, onAdicionar }) => {
   const [novoEvento, setNovoEvento] = React.useState({
     title: '',
     start: '',
     end: '',
-    desc: '',
-    color: '',
+    descricao: '',
+    cor: '#000000',
     tipo: '',
   });
 
@@ -16,7 +18,11 @@ const Adicionar = ({ isOpen, onRequestClose, onAdicionar }) => {
     setNovoEvento({ ...novoEvento, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const formatDate = (date) => {
+    return format(new Date(date), 'dd-MM-yyyy HH:mm');
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (novoEvento.title && novoEvento.start && novoEvento.end) {
       const startDate = new Date(novoEvento.start);
@@ -26,16 +32,37 @@ const Adicionar = ({ isOpen, onRequestClose, onAdicionar }) => {
         alert('A data início deve ser anterior à data de término');
         return;
       }
-      onAdicionar(novoEvento);
-      setNovoEvento({
-        title: '',
-        start: '',
-        end: '',
-        desc: '',
-        color: '',
-        tipo: '',
-      });
-      onRequestClose();
+      console.log(localStorage.getItem("Id"))
+      try {
+        const token = localStorage.getItem('token'); // Obtenha o token de autenticação do localStorage ou de onde quer que esteja armazenado
+
+        const response = await axios.post(`http://localhost:8080/agenda/${localStorage.getItem("Id")}/eventos`, {
+          titulo: novoEvento.title,
+          dataIni: formatDate(novoEvento.start),
+          dataFim: formatDate(novoEvento.end),
+          descricao: novoEvento.descricao,
+          cor: novoEvento.cor,
+          tipo: novoEvento.tipo,
+        }, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem("token")}`
+          }
+        });
+
+        onAdicionar(response.data);
+        setNovoEvento({
+          title: '',
+          start: '',
+          end: '',
+          descricao: '',
+          cor: '#000000',
+          tipo: '',
+        });
+        onRequestClose();
+      } catch (error) {
+        console.error('Erro ao adicionar evento:', error);
+        alert('Erro ao adicionar evento');
+      }
     }
   };
 
@@ -85,11 +112,11 @@ const Adicionar = ({ isOpen, onRequestClose, onAdicionar }) => {
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
         <label style={{ marginBottom: '5px' }}>Descrição</label>
-        <input type="text" name="desc" value={novoEvento.desc} onChange={handleChange} style={{ marginTop: '5px', padding: '8px', borderRadius: '4px', border: '1px solid #ced4da' }} />
+        <textarea name="descricao" value={novoEvento.descricao} onChange={handleChange} style={{ marginTop: '5px', padding: '8px', borderRadius: '4px', border: '1px solid #ced4da' }} />
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
         <label style={{ marginBottom: '5px' }}>Cor</label>
-        <input type="color" name="color" value={novoEvento.color} onChange={handleChange} style={{ marginTop: '5px', padding: '8px', borderRadius: '4px', border: '1px solid #ced4da' }} />
+        <input type="color" name="cor" value={novoEvento.cor} onChange={handleChange} style={{ marginTop: '5px', padding: '8px', borderRadius: '4px', border: '1px solid #ced4da' }} />
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
         <label style={{ marginBottom: '5px' }}>Tipo</label>
