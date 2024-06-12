@@ -20,7 +20,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/agenda")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class AgendaController {
 
     @Autowired
