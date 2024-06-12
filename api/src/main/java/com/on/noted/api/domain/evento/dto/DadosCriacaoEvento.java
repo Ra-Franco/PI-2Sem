@@ -17,7 +17,6 @@ public record DadosCriacaoEvento(
         @JsonFormat(pattern = "dd-MM-yyyy HH:mm")
         @NotNull
         String dataFim,
-        @NotNull
         String descricao,
         String cor,
         String tipo
