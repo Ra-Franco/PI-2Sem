@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-
-
-const initialUsers = {
-  'testuser': 'password123' // Exemplo de usuário inicial
-};
+import axios from 'axios';
 
 function LoginApp({ onLogin }) {
   const [template, setTemplate] = useState('login');
-  const [users, setUsers] = useState(initialUsers);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -16,22 +11,39 @@ function LoginApp({ onLogin }) {
     setTemplate(newTemplate);
   };
 
-  const handleRegister = (event) => {
+  const handleRegister = async (event) => {
     event.preventDefault();
-    if (users[username]) {
-      alert('Usuário já existe');
-    } else {
-      setUsers({ ...users, [username]: password });
-      alert('Usuário registrado com sucesso');
-      setTemplate('login');
+    try {
+      const response = await axios.post('http://localhost:8080/cadastrar', {
+        email: username,
+        senha: password
+      });
+      if (response.status === 201) {
+        alert('Usuário registrado com sucesso');
+        setTemplate('login');
+      }
+    } catch (error) {
+      console.error('Erro ao registrar usuário:', error);
+      alert('Erro ao registrar usuário');
     }
   };
 
-  const handleLogin = (event) => {
+
+  const handleLogin = async (event) => {
     event.preventDefault();
-    if (users[username] && users[username] === password) {
-      onLogin();
-    } else {
+    try {
+      const response = await axios.post('http://localhost:8080/login', {
+        email: username,
+        senha: password
+      });
+      if (response.status === 200) {
+        console.log(response);
+        const token = response.data.token; 
+        localStorage.setItem('token', token);
+        onLogin();
+      }
+    } catch (error) {
+      console.error('Erro ao fazer login:', error);
       alert('Nome de usuário ou senha incorretos');
     }
   };
