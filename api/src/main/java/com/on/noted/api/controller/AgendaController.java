@@ -8,6 +8,7 @@ import com.on.noted.api.domain.evento.dto.DadosCriacaoEvento;
 import com.on.noted.api.domain.evento.Evento;
 import com.on.noted.api.service.AgendaService;
 import jakarta.validation.Valid;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,7 +51,7 @@ public class AgendaController {
 
     @GetMapping("/{id}/eventos")
     @Transactional
-    public ResponseEntity<Map<LocalDate, List<Evento>>> getEventosByData(@PathVariable Long id, @PathVariable String dataIni, String dataFim){
+    public ResponseEntity<Map<LocalDate, List<Evento>>> getEventosByData(@PathVariable Long id, @RequestParam String dataIni, @RequestParam String dataFim){
         var eventos = service.getEventosByData(id, dataIni, dataFim);
         return ResponseEntity.ok(eventos);
     }

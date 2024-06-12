@@ -32,7 +32,6 @@ public class AgendaService {
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     public HashMap<LocalDate, List<Evento>> getEventosByData(Long id, String dataIni, String dataFim) {
-
             var listEventos = eventoRepository.findEventoByDatas(id, LocalDate.parse(dataIni, formatter), LocalDate.parse(dataFim, formatter));
             HashMap<LocalDate, List<Evento>> mapEventos = new HashMap<>();
             for (Evento e : listEventos) {
