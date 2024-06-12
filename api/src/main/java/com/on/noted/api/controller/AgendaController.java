@@ -59,7 +59,7 @@ public class AgendaController {
 
     @PostMapping("/{id}/eventos")
     @Transactional
-    public ResponseEntity adicionarEvento(@PathVariable Long id,@RequestBody @Valid DadosCriacaoEvento dados){
+    public ResponseEntity adicionarEvento(@PathVariable Long id, @RequestBody @Valid DadosCriacaoEvento dados){
         var dto = service.adicionaEvento(id, dados);
         return ResponseEntity.ok(dto);
     }
