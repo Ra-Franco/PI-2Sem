@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public record DadosAlteracaoEvento(
+        Long id,
         String title,
         String start,
         String end,

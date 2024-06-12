@@ -39,11 +39,18 @@ public class Evento {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         this.titulo = dados.titulo();
         this.agenda = agenda;
-        this.evDataIni = LocalDateTime.parse(dados.dataIni(), formatter);
-        this.evDataFim = LocalDateTime.parse(dados.dataFim(), formatter);
+        this.evDataIni = parseData(dados.dataIni(), formatter);
+        this.evDataFim = parseData(dados.dataFim(), formatter);
         this.evDescricao = dados.descricao();
         this.evCor = dados.cor();
         this.tipo = dados.tipo();
+    }
+
+    private LocalDateTime parseData(String data, DateTimeFormatter formatter) {
+        if (data == null) {
+            throw new IllegalArgumentException("Data não pode ser nula");
+        }
+        return LocalDateTime.parse(data, formatter);
     }
 
     public Long getEvId() {
