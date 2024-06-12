@@ -51,7 +51,7 @@ public class AgendaController {
 
     @GetMapping("/{id}/eventos")
     @Transactional
-    public ResponseEntity<Map<LocalDate, List<Evento>>> getEventosByData(@PathVariable Long id, @RequestParam String dataIni, @RequestParam String dataFim){
+    public ResponseEntity<List<Evento>> getEventosByData(@PathVariable Long id, @RequestParam String dataIni, @RequestParam String dataFim){
         var eventos = service.getEventosByData(id, dataIni, dataFim);
         return ResponseEntity.ok(eventos);
     }

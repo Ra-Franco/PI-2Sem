@@ -31,13 +31,18 @@ public class AgendaService {
     private final DateTimeFormatter formatterHour = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-    public HashMap<LocalDate, List<Evento>> getEventosByData(Long id, String dataIni, String dataFim) {
-            var listEventos = eventoRepository.findEventoByDatas(id, LocalDate.parse(dataIni, formatter), LocalDate.parse(dataFim, formatter));
-            HashMap<LocalDate, List<Evento>> mapEventos = new HashMap<>();
-            for (Evento e : listEventos) {
-                adicionarEventos(e, mapEventos);
-            }
-            return mapEventos;
+//    public HashMap<LocalDate, List<Evento>> getEventosByData(Long id, String dataIni, String dataFim) {
+//            var listEventos = eventoRepository.findEventoByDatas(id, LocalDate.parse(dataIni, formatter), LocalDate.parse(dataFim, formatter));
+//            HashMap<LocalDate, List<Evento>> mapEventos = new HashMap<>();
+//            for (Evento e : listEventos) {
+//                adicionarEventos(e, mapEventos);
+//            }
+//            return mapEventos;
+//    }
+
+
+    public List<Evento> getEventosByData(Long id, String dataIni, String dataFim) {
+            return eventoRepository.findEventoByDatas(id, LocalDate.parse(dataIni, formatter), LocalDate.parse(dataFim, formatter));
     }
     private void adicionarEventos(Evento evento, HashMap<LocalDate, List<Evento>> mapEventos){
         LocalDate dataEvento = evento.getEvDataIni().toLocalDate();
