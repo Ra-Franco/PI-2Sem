@@ -9,11 +9,13 @@ import java.util.Optional;
 
 public interface EventoRepository extends JpaRepository<Evento, Long> {
     @Query(value = "select e.ev_id,e.ev_data_ini, e.ev_data_fim, e.ev_descricao, e.ev_cor, e.ev_tipo,e.ev_titulo, e.agenda_id from eventos e\n" +
-            "where e.agenda_id = :agendaId\n" +
+            "right join agenda a \n" +
+            "on a.id  = e.agenda_id \n" +
+            "where a.user_id = :userId\n" +
             "and e.ev_data_ini >= :dataIni\n" +
             "and e.ev_data_fim <= :dataFim"
             , nativeQuery = true)
-    List<Evento> findEventoByDatas(Long agendaId, LocalDate dataIni, LocalDate dataFim);
+    List<Evento> findEventoByDatas(Long userId, LocalDate dataIni, LocalDate dataFim);
 
     @Query(value = "select e.* from eventos e\n" +
             "where e.agenda_id = :agendaId \n" +
