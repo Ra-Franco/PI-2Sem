@@ -70,10 +70,10 @@ public class AgendaController {
         return ResponseEntity.ok(dto);
     }
 
-    @PutMapping("/{id}/eventos")
+    @PutMapping("/{id}/eventos/{idEvento}")
     @Transactional
-    public ResponseEntity alterarEvento(@PathVariable Long id, @RequestBody @Valid DadosAlteracaoEvento dados){
-        var dto = service.alterarEvento(id, dados);
+    public ResponseEntity alterarEvento(@PathVariable Long id, @PathVariable Long idEvento,@RequestBody @Valid DadosAlteracaoEvento dados){
+        var dto = service.alterarEvento(id, idEvento ,dados);
         return ResponseEntity.ok(dto);
     }
 

@@ -74,14 +74,14 @@ public class AgendaService {
         eventoRepository.deleteEventoById(idAgenda, idEvento);
     }
 
-    public Evento alterarEvento(Long id, @Valid DadosAlteracaoEvento dados) {
-        Optional<Evento> evento = eventoRepository.findEventoById(id ,dados.id());
+    public Evento alterarEvento(Long id, Long idEvento ,@Valid DadosAlteracaoEvento dados) {
+        Optional<Evento> evento = eventoRepository.findEventoById(id ,idEvento);
         if(evento.isPresent()){
             Evento eventoExistente = evento.get();
-            eventoExistente.setEvCor(dados.cor());
-            eventoExistente.setEvDescricao(dados.descricao());
-            eventoExistente.setEvDataFim(LocalDateTime.parse(dados.dataFim(), formatterHour));
-            eventoExistente.setEvDataIni(LocalDateTime.parse(dados.dataIni(), formatterHour));
+            eventoExistente.setEvCor(dados.color());
+            eventoExistente.setEvDescricao(dados.desc());
+            eventoExistente.setEvDataFim(LocalDateTime.parse(dados.start(), formatterHour));
+            eventoExistente.setEvDataIni(LocalDateTime.parse(dados.end(), formatterHour));
             eventoExistente.setTipo(dados.tipo());
 
             return eventoRepository.save(eventoExistente);

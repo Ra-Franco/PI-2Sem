@@ -7,15 +7,11 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public record DadosAlteracaoEvento(
-        @NotNull
-        Long id,
-        String titulo,
-        @JsonFormat(pattern = "dd-MM-yyyy HH:mm")
-        String dataIni,
-        @JsonFormat(pattern = "dd-MM-yyyy HH:mm")
-        String dataFim,
-        String descricao,
-        String cor,
+        String title,
+        String start,
+        String end,
+        String desc,
+        String color,
         String tipo
 ) {
 }
