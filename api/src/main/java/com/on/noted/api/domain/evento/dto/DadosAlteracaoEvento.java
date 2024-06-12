@@ -9,12 +9,14 @@ import java.time.LocalDateTime;
 public record DadosAlteracaoEvento(
         @NotNull
         Long id,
-        @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
         @NotNull
-        LocalDateTime dataIni,
-        @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+        String titulo,
+        @JsonFormat(pattern = "dd-MM-yyyy HH:mm")
         @NotNull
-        LocalDateTime dataFim,
+        String dataIni,
+        @JsonFormat(pattern = "dd-MM-yyyy HH:mm")
+        @NotNull
+        String dataFim,
         @NotNull
         String descricao,
         String cor,

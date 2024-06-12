@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +27,8 @@ public class AgendaService {
 
     @Autowired
     private EventoRepository eventoRepository;
+
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
     public HashMap<LocalDate, List<Evento>> getEventosByData(Long id, DatasEventos datasEventos) {
             var listEventos = eventoRepository.findEventoByDatas(id, datasEventos.dataIni(), datasEventos.dataFim());
@@ -70,8 +74,8 @@ public class AgendaService {
             Evento eventoExistente = evento.get();
             eventoExistente.setEvCor(dados.cor());
             eventoExistente.setEvDescricao(dados.descricao());
-            eventoExistente.setEvDataFim(dados.dataFim());
-            eventoExistente.setEvDataIni(dados.dataIni());
+            eventoExistente.setEvDataFim(LocalDateTime.parse(dados.dataFim(), formatter));
+            eventoExistente.setEvDataIni(LocalDateTime.parse(dados.dataIni(), formatter));
             eventoExistente.setTipo(dados.tipo());
 
             return eventoRepository.save(eventoExistente);

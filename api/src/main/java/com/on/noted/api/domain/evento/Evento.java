@@ -5,6 +5,7 @@ import com.on.noted.api.domain.evento.dto.DadosCriacaoEvento;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Table(name = "eventos")
@@ -15,6 +16,8 @@ public class Evento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ev_id")
     private Long EvId;
+    @Column(name = "ev_titulo")
+    private String titulo;
     @Column(name = "ev_data_ini")
     private LocalDateTime evDataIni;
     @Column(name = "ev_data_fim")
@@ -30,10 +33,14 @@ public class Evento {
     @JoinColumn(name = "agenda_id", nullable = false)
     private Agenda agenda;
 
+
+
     public Evento(Agenda agenda, DadosCriacaoEvento dados) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        this.titulo = dados.titulo();
         this.agenda = agenda;
-        this.evDataIni = dados.dataIni();
-        this.evDataFim = dados.dataFim();
+        this.evDataIni = LocalDateTime.parse(dados.dataIni(), formatter);
+        this.evDataFim = LocalDateTime.parse(dados.dataFim(), formatter);
         this.evDescricao = dados.descricao();
         this.evCor = dados.cor();
         this.tipo = dados.tipo();
@@ -41,6 +48,14 @@ public class Evento {
 
     public Long getEvId() {
         return EvId;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public LocalDateTime getEvDataIni() {
@@ -83,13 +98,14 @@ public class Evento {
 
     public Evento(){}
 
-    public Evento(Long EvId, LocalDateTime evDataIni, String evDescricao, String evCor, Agenda agenda, String tipo) {
+    public Evento(Long EvId, LocalDateTime evDataIni, String evDescricao, String evCor, Agenda agenda, String tipo, String titulo) {
         this.EvId = EvId;
         this.evDataIni = evDataIni;
         this.evDescricao = evDescricao;
         this.agenda = agenda;
         this.evCor = evCor;
         this.tipo = tipo;
+        this.titulo = titulo;
     }
 
     @Override
