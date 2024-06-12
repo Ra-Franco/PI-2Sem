@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import axios from 'axios';
 
@@ -6,6 +6,16 @@ function LoginApp({ onLogin }) {
   const [template, setTemplate] = useState('login');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const storedUsername = localStorage.getItem('username');
+    if (token && storedUsername) {
+      setUserName(storedUsername);
+    }
+  }, []);
 
   const handleTemplateChange = (newTemplate) => {
     setTemplate(newTemplate);
@@ -28,7 +38,6 @@ function LoginApp({ onLogin }) {
     }
   };
 
-
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
@@ -38,11 +47,11 @@ function LoginApp({ onLogin }) {
       });
       if (response.status === 200) {
         console.log(response);
-        const token = response.data.token; 
+        const token = response.data.token;
         const id = response.data.id;
         localStorage.setItem('token', token);
         localStorage.setItem('Id', id);
-        onLogin();
+        onLogin(userName);
       }
     } catch (error) {
       console.error('Erro ao fazer login:', error);

@@ -34,7 +34,7 @@ const Adicionar = ({ isOpen, onRequestClose, onAdicionar }) => {
       }
       console.log(localStorage.getItem("Id"))
       try {
-        const token = localStorage.getItem('token'); // Obtenha o token de autenticação do localStorage ou de onde quer que esteja armazenado
+        const token = localStorage.getItem('token');
 
         const response = await axios.post(`http://localhost:8080/agenda/${localStorage.getItem("Id")}/eventos`, {
           titulo: novoEvento.title,

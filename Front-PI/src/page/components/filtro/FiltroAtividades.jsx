@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import {Form} from 'react-bootstrap'
 
 function FiltroAtividades({atividades,onSelecionarAtividades}){
-    const tiposAtividades = [... new Set(atividades.map(atividade => atividade.tipo))].filter(tipo=> tipo!== '');
+    console.log(atividades)
+    const tiposAtividades = Array.isArray(atividades)
+        ? [...new Set(atividades.map(atividade => atividade.tipo).filter(tipo => tipo))]
+        : [];
 
     const [tiposSelecionados, setTiposSelecionados] = useState([]);
 

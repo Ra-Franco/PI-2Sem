@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form, Collapse } from 'react-bootstrap';
 import axios from 'axios';
+import { formatDate } from 'date-fns';
 
 const EventModal = ({ evento, onClose, onDelete, onUpdate }) => {
     const [editedEvent, setEditedEvent] = useState({
         ...evento,
         dataIni: evento.dataIni ? new Date(evento.dataIni).toISOString().slice(0, -8) : '',
         dataFim: evento.dataFim ? new Date(evento.dataFim).toISOString().slice(0, -8) : '',
-        cor: evento.cor || '#000000', // Define uma cor padrão se a cor não estiver definida
+        cor: evento.cor || '#000000',
     });
     const [collapsed, setCollapsed] = useState(true);
 
@@ -36,7 +37,11 @@ const EventModal = ({ evento, onClose, onDelete, onUpdate }) => {
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`http://localhost:8080/agenda/${localStorage.getItem("Id")}/eventos/${evento.id}`);
+            await axios.delete(`http://localhost:8080/agenda/${localStorage.getItem("Id")}/eventos/${evento.id}`,{
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem("token")}`
+            }
+            });
             onDelete(evento.id);
         } catch (error) {
             console.error('Erro ao apagar evento:', error);
@@ -46,7 +51,20 @@ const EventModal = ({ evento, onClose, onDelete, onUpdate }) => {
 
     const handleUpdate = async () => {
         try {
-            const response = await axios.put(`http://localhost:8080/agenda/${localStorage.getItem("Id")}/eventos/${editedEvent.id}`, editedEvent);
+            console.log(editedEvent)
+            const response = await axios.put(`http://localhost:8080/agenda/${localStorage.getItem("Id")}/eventos/${editedEvent.id}`, editedEvent,{
+                title: editedEvent.title,
+                start: editedEvent.start,
+                end: editedEvent.end,
+                desc: editedEvent.desc,
+                color: editedEvent.color,
+                tipo: editedEvent.tipo,
+            },{
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`
+                }
+            });
+            
             onUpdate(response.data);
             onClose();
         } catch (error) {
@@ -74,24 +92,24 @@ const EventModal = ({ evento, onClose, onDelete, onUpdate }) => {
                     </Form.Group>
                     <Form.Group controlId="formDesc">
                         <Form.Label>Descrição</Form.Label>
-                        <Form.Control as="textarea" rows={3} name="descricao" value={editedEvent.descricao} onChange={handleInputChange} />
+                        <Form.Control as="textarea" rows={3} name="desc" value={editedEvent.desc} onChange={handleInputChange} />
                     </Form.Group>
 
                     <Collapse in={!collapsed}>
                         <div>
                             <Form.Group controlId="formInicio">
                                 <Form.Label>Início</Form.Label>
-                                <Form.Control type="datetime-local" name="start" value={adjustDate(editedEvent.dataIni)} onChange={handleStartDateChange} />
+                                <Form.Control type="datetime-local" name="start" value={editedEvent.start} onChange={handleStartDateChange} />
                             </Form.Group>
 
                             <Form.Group controlId="formEnd">
                                 <Form.Label>Fim</Form.Label>
-                                <Form.Control type="datetime-local" name="end" value={adjustDate(editedEvent.dataFim)} onChange={handleEndDateChange} />
+                                <Form.Control type="datetime-local" name="end" value={editedEvent.end} onChange={handleEndDateChange} />
                             </Form.Group>
 
                             <Form.Group controlId="formColor">
                                 <Form.Label>Cor</Form.Label>
-                                <Form.Control type="color" name="color" value={editedEvent.cor} onChange={handleColorChange} />
+                                <Form.Control type="color" name="cor" value={editedEvent.cor} onChange={handleColorChange} />
                             </Form.Group>
 
                             <Form.Group controlId="formTipo">
@@ -116,5 +134,4 @@ const EventModal = ({ evento, onClose, onDelete, onUpdate }) => {
         </Modal>
     );
 };
-
 export default EventModal;
