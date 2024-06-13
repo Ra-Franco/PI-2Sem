@@ -19,8 +19,10 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
             , nativeQuery = true)
     List<Evento> findEventoByDatas(Long userId, LocalDate dataIni, LocalDate dataFim);
 
-    @Query(value = "select e.* from eventos e\n" +
-            "where e.agenda_id = :agendaId \n" +
+    @Query(value = "select e.* from eventos e\n " +
+            "left join agenda a \n" +
+            "on a.id = e.agenda_id \n" +
+            "where a.user_id = :agendaId \n" +
             "and e.ev_id = :id"
             , nativeQuery = true)
     Optional<Evento> findEventoById(Long agendaId, Long id);

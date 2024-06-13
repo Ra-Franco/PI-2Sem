@@ -78,10 +78,11 @@ public class AgendaService {
         Optional<Evento> evento = eventoRepository.findEventoById(id ,idEvento);
         if(evento.isPresent()){
             Evento eventoExistente = evento.get();
-            eventoExistente.setEvCor(dados.color());
-            eventoExistente.setEvDescricao(dados.desc());
+            eventoExistente.setTitulo(dados.title());
             eventoExistente.setEvDataFim(LocalDateTime.parse(dados.start(), formatterHour));
             eventoExistente.setEvDataIni(LocalDateTime.parse(dados.end(), formatterHour));
+            eventoExistente.setEvDescricao(dados.desc());
+            eventoExistente.setEvCor(dados.color());
             eventoExistente.setTipo(dados.tipo());
 
             return eventoRepository.save(eventoExistente);
