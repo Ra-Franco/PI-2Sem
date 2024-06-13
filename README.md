@@ -36,3 +36,5 @@ Node.js e npm instalados <br/>
 Java Development Kit (JDK) instalado <br/>
 Spring Boot CLI instalado
 
+## Elevador Pitch do projeto :
+#### https://www.youtube.com/watch?v=kczHAdl8vWo&ab_channel=PedroSilva
