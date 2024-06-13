@@ -5,8 +5,8 @@ Esta aplicação proporciona uma interface amigável e intuitiva, juntamente com
 
 ## Funcionalidades Principais
 ### Adição e Edição de Eventos
-Criação e modificação rápida de eventos.
- Especificação de título, data de início e término, descrição, cor e tipo de evento.
+Criação e modificação rápida de eventos. <br/>
+Especificação de título, data de início e término, descrição, cor e tipo de evento.
 ### Integração com Banco de Dados
 Armazenamento seguro e acessível dos eventos.
 ### Arrastar e Soltar
@@ -31,4 +31,8 @@ HTML,
 CSS
 ### Backend
 Java Spring Boot
+## Pré-requisitos para instalação
+Node.js e npm instalados <br/>
+Java Development Kit (JDK) instalado <br/>
+Spring Boot CLI instalado
 
