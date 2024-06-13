@@ -25,9 +25,10 @@ Oferece personalização adaptável às necessidades específicas de cada usuár
 ### Segurança 
 Garantia de privacidade e integridade das informações dos usuários com armazenamento seguro de dados.
 ## Tecnologias Utilizadas
-### Frontend:
+### Frontend
 JavaScript (React),
 HTML,
 CSS
-### Backend:
+### Backend
 Java Spring Boot
+
