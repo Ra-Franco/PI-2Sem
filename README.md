@@ -1,4 +1,4 @@
-**# On-Noted: Calendário de Eventos
+### On-Noted: Calendário de Eventos
 ## Introdução
 Bem-vindo ao On-Noted, um Calendário de Eventos inovador desenvolvido para simplificar a organização e gestão de compromissos e atividades. 
 Esta aplicação proporciona uma interface amigável e intuitiva, juntamente com funcionalidades avançadas para ajudar profissionais e equipes a manterem suas agendas sempre sincronizadas e atualizadas.
