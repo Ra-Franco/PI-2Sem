@@ -81,7 +81,9 @@ const EventModal = ({ evento, onClose, onDelete, onUpdate }) => {
             if (!response.ok) {
                 throw new Error('Network response was not ok ' + response.statusText);
             }
-
+            console.log(response)
+            const data = await response.json();
+            onUpdate(data);
             onClose();
         } catch (error) {
             console.error('Erro ao atualizar evento:', error);
