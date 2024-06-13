@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form, Collapse } from 'react-bootstrap';
 import axios from 'axios';
-import { formatDate } from 'date-fns';
+import { format } from 'date-fns';
 
 const EventModal = ({ evento, onClose, onDelete, onUpdate }) => {
     const [editedEvent, setEditedEvent] = useState({
@@ -10,6 +10,10 @@ const EventModal = ({ evento, onClose, onDelete, onUpdate }) => {
         dataFim: evento.dataFim ? new Date(evento.dataFim).toISOString().slice(0, -8) : '',
         cor: evento.cor || '#000000',
     });
+
+    const formatDate = (date) => {
+        return format(new Date(date), 'dd-MM-yyyy HH:mm');
+    };
     const [collapsed, setCollapsed] = useState(true);
 
     const handleInputChange = (e) => {
@@ -37,10 +41,10 @@ const EventModal = ({ evento, onClose, onDelete, onUpdate }) => {
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`http://localhost:8080/agenda/${localStorage.getItem("Id")}/eventos/${evento.id}`,{
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem("token")}`
-            }
+            await axios.delete(`http://localhost:8080/agenda/${localStorage.getItem("Id")}/eventos/${evento.id}`, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`
+                }
             });
             onDelete(evento.id);
         } catch (error) {
@@ -51,21 +55,33 @@ const EventModal = ({ evento, onClose, onDelete, onUpdate }) => {
 
     const handleUpdate = async () => {
         try {
-            console.log(editedEvent)
-            const response = await axios.put(`http://localhost:8080/agenda/${localStorage.getItem("Id")}/eventos/${editedEvent.id}`, editedEvent,{
-                title: editedEvent.title,
-                start: editedEvent.start,
-                end: editedEvent.end,
-                desc: editedEvent.desc,
-                color: editedEvent.color,
-                tipo: editedEvent.tipo,
-            },{
+            console.log(editedEvent);
+            console.log(evento);
+
+            const id = Number(evento.id);
+            const url = `http://localhost:8080/agenda/${localStorage.getItem("Id")}/eventos/${id}`;
+
+            const response = await fetch(url, {
+                method: 'PUT',
                 headers: {
+                    'Content-Type': 'application/json',
                     'Authorization': `Bearer ${localStorage.getItem("token")}`
-                }
+                },
+                body: JSON.stringify({
+                    id: editedEvent.id,
+                    title: editedEvent.title,
+                    start: formatDate(editedEvent.start),
+                    end: formatDate(editedEvent.end),
+                    desc: editedEvent.desc,
+                    color: editedEvent.color,
+                    tipo: editedEvent.tipo,
+                })
             });
-            
-            onUpdate(response.data);
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+
             onClose();
         } catch (error) {
             console.error('Erro ao atualizar evento:', error);
