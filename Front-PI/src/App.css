@@ -7,6 +7,22 @@
   pointer-events: none;
 }
 
+
+.user-info svg {
+  margin-right: 10px;
+}
+
+.user-info {
+  display: flex;
+  margin-right: 2rem;
+  align-items: center;
+}
+
+.user-greeting {
+  font-family: 'Roboto Condensed';
+  font-size: 4vh;
+}
+
 .wrapper {
     width: 420px;
     background: rgba(128, 128, 128, 0.2);;
